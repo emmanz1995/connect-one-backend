@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
-const postModel = new Schema({
+const postSchema = new Schema({
     content: {
         type: String,
         required: true
@@ -20,10 +20,14 @@ const postModel = new Schema({
     }]
 }, { timestamps: true })
 
-postModel.set('toJson', {
+postSchema.set('toJSON', {
     transform: (doc, object) => {
         object.id = object._id.toString()
         delete object._id
         delete object.__v
     }
 })
+
+const Post = mongoose.model('post', postSchema)
+
+module.exports = Post

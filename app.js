@@ -3,6 +3,8 @@ const app = express()
 const cors = require('cors')
 require('express-async-errors')
 const userController = require('./controller/userController')
+const authController = require('./controller/authController')
+const postController = require('./controller/postController')
 const ErrorHandler = require('./middleware/ErrorHandler')
 const mongoose = require('mongoose')
 require('dotenv').config()
@@ -24,6 +26,8 @@ mongoose.connect(MONGODBURI)
 app.use(express.json())
 
 app.use('/api/user', userController)
+app.use('/api/auth', authController)
+app.use('/api/post', postController)
 const corsOptions = { origin: '*' }
 
 app.use(cors(corsOptions))
