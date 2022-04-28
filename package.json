@@ -1,0 +1,32 @@
+{
+  "name": "connect-one-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmmanuelOkuchukwu/connect-one-backend.git"
+  },
+  "author": "Emmanuel Okuchukwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmmanuelOkuchukwu/connect-one-backend/issues"
+  },
+  "homepage": "https://github.com/EmmanuelOkuchukwu/connect-one-backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "express-async-errors": "^3.1.1",
+    "http-status-codes": "^2.2.0",
+    "mongoose": "^6.3.1",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.5.0"
+  }
+}
