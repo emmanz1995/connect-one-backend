@@ -9,13 +9,11 @@ require('dotenv').config()
 
 const MONGODBURI = process.env.MONGODB_URI
 
-app.get('/', (res, req) => {
-    res.status(200).send('<h1>Welcome to the Connect One social media App!</h1>')
+app.get('/', (req, res) => {
+    res.status(200).send('<h1>Welcome to Connect One social media App!</h1>')
 })
 
-mongoose.connect(MONGODBURI, {
-    useNewUrlParser: true, useUnifiedTopology: true,
-})
+mongoose.connect(MONGODBURI)
     .then(() => {
         console.log('MongoDB connection Successful!')
     })
