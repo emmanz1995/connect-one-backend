@@ -23,7 +23,7 @@ PostRoute.post('/', requireLogin, async(req, res) => {
 })
 
 PostRoute.get('/', async (req, res) => {
-    const getPosts = await Post.find()
+    const getPosts = await Post.find().populate('likes', 'username')
     res.status(StatusCodes.OK).json(getPosts)
 })
 
