@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/EmmanuelOkuchukwu/connect-one-backend#readme",
   "dependencies": {
+    "bad-words": "^3.0.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",

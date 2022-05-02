@@ -3,6 +3,7 @@ const PostRoute = require('express').Router()
 const { StatusCodes } = require('http-status-codes')
 const BadRequestError = require('../errors/badRequest')
 const requireLogin = require('../middleware/requireLogin')
+const Filter = require('bad-words')
 
 PostRoute.post('/', requireLogin, async(req, res) => {
     const { content, image } = req.body
@@ -10,7 +11,12 @@ PostRoute.post('/', requireLogin, async(req, res) => {
     if(!content) {
         throw new BadRequestError('You didnt add any content!')
     }
-    console.log(req.user)
+    const filter = new Filter()
+    const badLanguage = filter.isProfane(content)
+
+    if(badLanguage) {
+        throw new BadRequestError('You can not you those filthy words on this platform, sorry!')
+    }
     const post = new Post({
         content,
         image,
