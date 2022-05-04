@@ -26,7 +26,10 @@ const userSchema = new Schema({
     post: [{
         type: Schema.Types.ObjectId,
         ref: 'post'
-    }]
+    }],
+    avatar: {
+        type: String
+    }
 }, { timestamps: true })
 
 userSchema.set('toJSON', {

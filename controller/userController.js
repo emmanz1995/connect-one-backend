@@ -5,6 +5,7 @@ const User = require('../model/userModel')
 const bcrypt = require('bcryptjs')
 const requireLogin = require('../middleware/requireLogin')
 const Filter = require('bad-words')
+const gravatar = require('gravatar')
 
 UserRoute.post('/', async (req, res) => {
     const { name, username, email, dob, password } = req.body
@@ -23,11 +24,15 @@ UserRoute.post('/', async (req, res) => {
     if(user) {
         throw new BadRequest('User email already exists!')
     }
+    const avatar = gravatar.url(email, {
+        s: '200', r: 'pg', d: '404'
+    });
     const hashedPassword = await bcrypt.hash(password, 10)
     const registerUser = new User({
         name,
         username,
         email,
+        avatar,
         dob,
         password: hashedPassword
     })
