@@ -42,8 +42,8 @@ PostRoute.get('/:postId', async (req, res) => {
 PostRoute.delete('/:postId', requireLogin, async (req, res) => {
     const { postId } = req.params
     const post = await Post.findById(postId)
-    if(req?.user?._id?.toString() === post?.user?._id?.toString()) {
-        await Post.findByIdAndDelete(postId)
+    if(req?.user?._id?.toString() === post?.postedBy?._id?.toString()) {
+        await Post.findByIdAndDelete(post)
         res.status(StatusCodes.NO_CONTENT).end()
     }
 })

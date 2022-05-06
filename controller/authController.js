@@ -3,15 +3,13 @@ const User = require('../model/userModel')
 const BadRequestError = require('../errors/badRequest')
 const bcrypt = require('bcryptjs')
 const { StatusCodes } = require('http-status-codes')
-const jwt = require('jsonwebtoken')
-const SECRET_KEY = process.env.SECRET_KEY
 const generateJwt = require('../util/generateJwt')
 
 LoginRoute.post('/', async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
     const checkUser = user === null ?
-        false : bcrypt.compare(password, user.password)
+        false : await bcrypt.compare(password, user.password)
     if(!(user && checkUser)) {
         throw new BadRequestError('Invalid credentials!')
     }
