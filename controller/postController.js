@@ -45,6 +45,8 @@ PostRoute.delete('/:postId', requireLogin, async (req, res) => {
     if(req?.user?._id?.toString() === post?.postedBy?._id?.toString()) {
         await Post.findByIdAndDelete(post)
         res.status(StatusCodes.NO_CONTENT).end()
+    } else {
+        throw new BadRequestError('Something went wrong!')
     }
 })
 
@@ -79,6 +81,26 @@ PostRoute.put('/dislike/:postId', requireLogin, async (req, res) => {
         }, {
             new: true
         })
+    res.status(StatusCodes.NO_CONTENT).end()
+})
+
+PostRoute.put('/comment/:postId', requireLogin, async (req, res) => {
+    const { postId } = req.params
+    const userId = req.user.id
+    const comment = {
+        comment: req.body.comment,
+        postedBy: userId
+    }
+    await Post.findByIdAndUpdate(postId, {
+        $push: {
+            comments: comment
+        }
+    }, {
+        new: true
+    })
+    if(!postId) {
+        throw new BadRequestError('Post does not exist!')
+    }
     res.status(StatusCodes.NO_CONTENT).end()
 })
 module.exports = PostRoute

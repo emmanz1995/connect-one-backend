@@ -28,7 +28,11 @@ app.use(express.json())
 app.use('/api/user', userController)
 app.use('/api/auth', authController)
 app.use('/api/post', postController)
-const corsOptions = { origin: '*' }
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+    optionSuccessStatus: 200
+}
 
 app.use(cors(corsOptions))
 app.use(ErrorHandler)
