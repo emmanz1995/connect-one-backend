@@ -5,6 +5,7 @@ require('express-async-errors')
 const userController = require('./controller/userController')
 const authController = require('./controller/authController')
 const postController = require('./controller/postController')
+const prayerController = require('./controller/prayerController')
 const ErrorHandler = require('./middleware/ErrorHandler')
 const mongoose = require('mongoose')
 require('dotenv').config()
@@ -28,6 +29,7 @@ app.use(express.json())
 app.use('/api/user', userController)
 app.use('/api/auth', authController)
 app.use('/api/post', postController)
+app.use('/api/prayer', prayerController)
 const corsOptions = {
     origin: '*',
     credentials: true,

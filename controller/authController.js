@@ -15,7 +15,6 @@ LoginRoute.post('/', async (req, res) => {
     const userInfo = {
         id: user.id,
         email: user.email,
-
     }
     const token = generateJwt(userInfo)
     res.status(StatusCodes.OK).json({ token, id: userInfo.id, username: user.username, avatar: user.avatar })

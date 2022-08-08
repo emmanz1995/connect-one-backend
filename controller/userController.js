@@ -40,7 +40,7 @@ UserRoute.post('/', async (req, res) => {
 })
 
 UserRoute.get('/', requireLogin, async (req, res) => {
-    const getProfile = await User.findById(req.user.id).populate('post').select('-password -__v').populate('bookmarks')
+    const getProfile = await User.findById(req.user.id).populate('post').select('-password -__v').populate('bookmarks').populate('prayer')
     res.status(StatusCodes.OK).json(getProfile)
 })
 
