@@ -1,5 +1,5 @@
 const http = require('http')
-const PORT = 3001
+const PORT = 3002
 const app = require('./app')
 
 const server = http.createServer(app)

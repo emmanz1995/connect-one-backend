@@ -33,6 +33,7 @@
     "socket.io": "^4.5.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "supertest": "^6.2.4"
   }
 }
