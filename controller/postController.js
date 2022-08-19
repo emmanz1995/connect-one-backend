@@ -53,25 +53,28 @@ PostRoute.delete('/:postId', requireLogin, async (req, res) => {
 PostRoute.put('/like/:postId', requireLogin, async (req, res) => {
     const { postId } = req.params
     const userId = req.user.id
-    const likedPost = await Post.find({ id: postId, likes: userId })
-    if(likedPost.length > 0) {
+    const post = await Post.findById(postId)
+    const isLiked = post.likes.filter((like) => like.toString() === userId)
+    if(isLiked.length > 0) {
         throw new BadRequestError('You liked this post already!')
     }
-    await Post.findByIdAndUpdate(postId, {
+    const like = await Post.findByIdAndUpdate(postId, {
         $push: {
             likes: userId
         }
     }, {
         new: true
     })
-    res.status(StatusCodes.NO_CONTENT).end()
+    res.status(StatusCodes.OK).json(like)
 })
 
 PostRoute.put('/dislike/:postId', requireLogin, async (req, res) => {
     const { postId } = req.params
     const userId = req.user.id
-    const dislike = await Post.find({ id: postId, likes: userId })
-    if(dislike.length < 0) {
+    // const dislike = await Post.find({ id: postId, likes: userId })
+    const post = await Post.findById(postId)
+    const isDisliked = post.likes.filter((like) => like.toString() === userId)
+    if(isDisliked.length < 0) {
         throw new BadRequestError('I know you hate this post but you can only dislike once, sorry sad face ☹️')
     }
     await Post.findByIdAndUpdate(postId, {
