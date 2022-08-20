@@ -40,8 +40,13 @@ UserRoute.post('/', async (req, res) => {
 })
 
 UserRoute.get('/', requireLogin, async (req, res) => {
-    const getProfile = await User.findById(req.user.id).populate('post').select('-password -__v').populate('bookmarks').populate('prayer')
+    const getProfile = await User.findById(req.user.id).populate('post').select('-password -__v').populate('bookmarks')
     res.status(StatusCodes.OK).json(getProfile)
+})
+
+UserRoute.get('/all', requireLogin, async (req, res) => {
+    const getUsers = await User.find({})
+    res.status(StatusCodes.OK).json(getUsers)
 })
 
 UserRoute.put('/bookmark/:postId', requireLogin, async (req, res) => {

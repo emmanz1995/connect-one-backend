@@ -43,8 +43,8 @@ PostRoute.delete('/:postId', requireLogin, async (req, res) => {
     const { postId } = req.params
     const post = await Post.findById(postId)
     if(req?.user?._id?.toString() === post?.postedBy?._id?.toString()) {
-        await Post.findByIdAndDelete(post)
-        res.status(StatusCodes.NO_CONTENT).end()
+        const deletePost = await Post.findByIdAndDelete(post)
+        res.status(StatusCodes.OK).json(deletePost)
     } else {
         throw new BadRequestError('Something went wrong!')
     }
@@ -77,14 +77,14 @@ PostRoute.put('/dislike/:postId', requireLogin, async (req, res) => {
     if(isDisliked.length < 0) {
         throw new BadRequestError('I know you hate this post but you can only dislike once, sorry sad face ☹️')
     }
-    await Post.findByIdAndUpdate(postId, {
+    const dislikedPost = await Post.findByIdAndUpdate(postId, {
             $pull: {
                 likes: userId
             }
         }, {
             new: true
         })
-    res.status(StatusCodes.NO_CONTENT).end()
+    res.status(StatusCodes.OK).json(dislikedPost)
 })
 
 PostRoute.put('/comment/:postId', requireLogin, async (req, res) => {

@@ -20,5 +20,4 @@ LoginRoute.post('/', async (req, res) => {
     res.status(StatusCodes.OK).json({ token, id: userInfo.id, username: user.username, avatar: user.avatar })
 })
 
-
 module.exports = LoginRoute

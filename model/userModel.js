@@ -30,12 +30,6 @@ const userSchema = new Schema({
             ref: 'post'
         }
     ],
-    prayer: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'prayer'
-        }
-    ],
     avatar: {
         type: String
     },
