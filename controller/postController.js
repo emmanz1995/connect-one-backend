@@ -4,6 +4,7 @@ const { StatusCodes } = require('http-status-codes')
 const BadRequestError = require('../errors/badRequest')
 const requireLogin = require('../middleware/requireLogin')
 const Filter = require('bad-words')
+const User = require('../model/userModel')
 
 PostRoute.post('/', requireLogin, async(req, res) => {
     const { content, image } = req.body
@@ -20,7 +21,7 @@ PostRoute.post('/', requireLogin, async(req, res) => {
     const post = new Post({
         content,
         image,
-        postedBy: user.id
+        postedBy: user
     })
     const savedPost = await post.save()
     user.post = user.post.concat(savedPost)

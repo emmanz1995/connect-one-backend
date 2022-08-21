@@ -45,7 +45,7 @@ UserRoute.get('/', requireLogin, async (req, res) => {
 })
 
 UserRoute.get('/all', requireLogin, async (req, res) => {
-    const getUsers = await User.find({})
+    const getUsers = await User.find({}).populate('post')
     res.status(StatusCodes.OK).json(getUsers)
 })
 
