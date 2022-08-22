@@ -65,7 +65,7 @@ PostRoute.put('/like/:postId', requireLogin, async (req, res) => {
         }
     }, {
         new: true
-    })
+    }).populate('postedBy')
     res.status(StatusCodes.OK).json(like)
 })
 
@@ -84,7 +84,7 @@ PostRoute.put('/dislike/:postId', requireLogin, async (req, res) => {
             }
         }, {
             new: true
-        })
+        }).populate('postedBy')
     res.status(StatusCodes.OK).json(dislikedPost)
 })
 
