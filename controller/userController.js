@@ -5,10 +5,10 @@ const User = require('../model/userModel')
 const Post = require('../model/postModel')
 const requireLogin = require('../middleware/requireLogin')
 const Filter = require('bad-words')
-const gravatar = require('gravatar')
+const cloudinary = require('cloudinary').v2
 
 UserRoute.post('/', async (req, res) => {
-    const { name, username, email, dob, password } = req.body
+    const { name, username, email, dob, avatar, password } = req.body
     if(!name || !username || !email || !password) throw new BadRequest('Please add all the fields!')
     const user = await User.findOne({ email })
     let filter = new Filter()
@@ -24,14 +24,14 @@ UserRoute.post('/', async (req, res) => {
     if(user) {
         throw new BadRequest('User email already exists!')
     }
-    const avatar = gravatar.url(email, {
-        s: '200', r: 'pg', d: '404'
-    });
+
+    const cloud = await cloudinary.uploader.upload(avatar, { folder: 'avatars' })
+
     const registerUser = new User({
         name,
         username,
         email,
-        avatar,
+        avatar: { publicId: cloud?.public_id, url: cloud?.secure_url },
         dob,
         password
     })

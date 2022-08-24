@@ -30,7 +30,7 @@ PostRoute.post('/', requireLogin, async(req, res) => {
 })
 
 PostRoute.get('/', async (req, res) => {
-    const getPosts = await Post.find().populate('postedBy', 'username avatar')
+    const getPosts = await Post.find().populate('postedBy', 'username avatar').populate('comments.postedBy', 'username')
     res.status(StatusCodes.OK).json(getPosts)
 })
 
@@ -95,7 +95,7 @@ PostRoute.put('/comment/:postId', requireLogin, async (req, res) => {
         comment: req.body.comment,
         postedBy: userId
     }
-    await Post.findByIdAndUpdate(postId, {
+    const commentOnPost = await Post.findByIdAndUpdate(postId, {
         $push: {
             comments: comment
         }
@@ -105,6 +105,6 @@ PostRoute.put('/comment/:postId', requireLogin, async (req, res) => {
     if(!postId) {
         throw new BadRequestError('Post does not exist!')
     }
-    res.status(StatusCodes.NO_CONTENT).end()
+    res.status(StatusCodes.OK).json(commentOnPost)
 })
 module.exports = PostRoute

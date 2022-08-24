@@ -31,7 +31,8 @@ const userSchema = new Schema({
         }
     ],
     avatar: {
-        type: String
+        publicId: String,
+        url: String,
     },
     following: [
         {
