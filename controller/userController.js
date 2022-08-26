@@ -88,4 +88,20 @@ UserRoute.put('/unbookmark/:postId', requireLogin, async (req, res) => {
     res.status(StatusCodes.OK).json(unbookmarkPost)
 })
 
+UserRoute.put('/follow/:id', requireLogin, async(req, res) => {
+    const userId = req.params.id
+        if(!userId) {
+            throw new BadRequest('Could not find user!')
+        }
+        const followUser = await User.findByIdAndUpdate(userId, {
+            $push: { following: userId }
+        })
+        await User.findByIdAndUpdate(userId, {
+            $push: { follower: req.user.id }
+        })
+        res.status(StatusCodes.OK).json(followUser)
+})
+
+UserRoute.put('/unfollow/:id', async(req, res) => {})
+
 module.exports = UserRoute
