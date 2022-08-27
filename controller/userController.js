@@ -90,18 +90,39 @@ UserRoute.put('/unbookmark/:postId', requireLogin, async (req, res) => {
 
 UserRoute.put('/follow/:id', requireLogin, async(req, res) => {
     const userId = req.params.id
-        if(!userId) {
-            throw new BadRequest('Could not find user!')
-        }
-        const followUser = await User.findByIdAndUpdate(userId, {
-            $push: { following: userId }
-        })
-        await User.findByIdAndUpdate(userId, {
-            $push: { follower: req.user.id }
-        })
-        res.status(StatusCodes.OK).json(followUser)
+    if(!userId) {
+        throw new BadRequest('Could not find user!')
+    }
+    const user = await User.findById(req.user.id)
+
+    if(user.following.includes(userId)) {
+        throw new BadRequest('You are already following this user!')
+    }
+    const followUser = await User.findByIdAndUpdate(req.user.id, {
+        $push: { following: userId }
+    })
+    await User.findByIdAndUpdate(userId, {
+        $push: { follower: req.user.id }
+    })
+    res.status(StatusCodes.OK).json(followUser)
 })
 
-UserRoute.put('/unfollow/:id', async(req, res) => {})
+UserRoute.put('/unfollow/:id', requireLogin, async(req, res) => {
+    const userId = req.params.id
+    if(!userId) {
+        throw new BadRequest('Could not find user!')
+    }
+    const user = await User.findById(req.user.id)
+    if(!user.following.includes(userId)) {
+        throw new BadRequest('You have already unfollowed this user!')
+    }
+    const followUser = await User.findByIdAndUpdate(req.user.id, {
+        $pull: { following: userId }
+    })
+    await User.findByIdAndUpdate(userId, {
+        $pull: { follower: req.user.id }
+    })
+    res.status(StatusCodes.OK).json(followUser)
+})
 
 module.exports = UserRoute
