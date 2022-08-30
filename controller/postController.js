@@ -2,6 +2,7 @@ const Post = require('../model/postModel')
 const PostRoute = require('express').Router()
 const { StatusCodes } = require('http-status-codes')
 const BadRequestError = require('../errors/badRequest')
+const NotFound = require('../errors/notFound')
 const requireLogin = require('../middleware/requireLogin')
 const Filter = require('bad-words')
 const User = require('../model/userModel')
@@ -30,8 +31,32 @@ PostRoute.post('/', requireLogin, async(req, res) => {
 })
 
 PostRoute.get('/', async (req, res) => {
-    const getPosts = await Post.find().populate('postedBy', 'username avatar').populate('comments.postedBy', 'username')
+    const getPosts = await Post.find()
+        .populate('postedBy', 'username avatar')
+        .populate('comments.postedBy', 'username')
     res.status(StatusCodes.OK).json(getPosts)
+})
+
+PostRoute.get('/getMyPosts', requireLogin, async (req, res) => {
+    const posts = await Post.find({ postedBy: req.user })
+        // .populate('postedBy')
+        // .select('username id avatar')
+    res.status(StatusCodes.OK).json(posts)
+})
+
+PostRoute.get('/getposts', requireLogin, async (req, res) => {
+    const user = await User.findById(req.user.id)
+    const posts = await Post.find(
+        {
+            postedBy: {
+                $in: user.following
+            }
+        }
+    )
+        .populate('postedBy')
+    res.status(StatusCodes.OK).json({
+        posts: posts.reverse()
+    })
 })
 
 PostRoute.get('/:postId', async (req, res) => {
@@ -72,7 +97,6 @@ PostRoute.put('/like/:postId', requireLogin, async (req, res) => {
 PostRoute.put('/dislike/:postId', requireLogin, async (req, res) => {
     const { postId } = req.params
     const userId = req.user.id
-    // const dislike = await Post.find({ id: postId, likes: userId })
     const post = await Post.findById(postId)
     const isDisliked = post.likes.filter((like) => like.toString() === userId)
     if(isDisliked.length < 0) {
@@ -107,4 +131,5 @@ PostRoute.put('/comment/:postId', requireLogin, async (req, res) => {
     }
     res.status(StatusCodes.OK).json(commentOnPost)
 })
+
 module.exports = PostRoute
