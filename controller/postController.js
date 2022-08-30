@@ -33,7 +33,7 @@ PostRoute.post('/', requireLogin, async(req, res) => {
 PostRoute.get('/', async (req, res) => {
     const getPosts = await Post.find()
         .populate('postedBy', 'username avatar')
-        .populate('comments.postedBy', 'username')
+        .populate('comments.postedBy', 'username').sort('-createdAt')
     res.status(StatusCodes.OK).json(getPosts)
 })
 
@@ -54,9 +54,7 @@ PostRoute.get('/getposts', requireLogin, async (req, res) => {
         }
     )
         .populate('postedBy')
-    res.status(StatusCodes.OK).json({
-        posts: posts.reverse()
-    })
+    res.status(StatusCodes.OK).json(posts)
 })
 
 PostRoute.get('/:postId', async (req, res) => {
