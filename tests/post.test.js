@@ -15,14 +15,12 @@ beforeEach(async () => {
     const hashedPassword = bcrypt.hash('Password@123?', salt)
 
     const user = new Users({
-        name: 'testuser',
-        username: 'test',
-        email: 'testUser@gamil.com',
+        name: "test user",
+        username: "test",
+        email: "testuser@gmail.com",
+        dob: "1995-01-01",
         password: hashedPassword,
-        avatar: {
-            publicId: 'avatars/zbcwu7ckgirmcj8mpnrm',
-            url: 'https://res.cloudinary.com/emmanuel-cloud-storage/image/upload/v1661525974/j6zxwa6gqa0vlrjhzdvc.jpg'
-        },
+        avatar: "https://res.cloudinary.com/emmanuel-cloud-storage/image/upload/v1637458305/goow4psmt5vuzuffjr7a.jpg",
     })
     await user.save()
 })
