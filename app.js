@@ -23,8 +23,8 @@ mongoose.connect(MONGODBURI)
         console.log(err)
     })
 
-app.use(express.json({ limit: '500000mb' }))
-app.use(express.urlencoded({ limit: '500000mb', extended: true }))
+app.use(express.json())
+// app.use(express.urlencoded())
 
 app.use('/api/user', userController)
 app.use('/api/auth', authController)
