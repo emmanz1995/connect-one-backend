@@ -1,263 +1,217 @@
 {
-	"info": {
-		"_postman_id": "c5196e6b-480c-4026-84ba-9e9e69f22091",
-		"name": "Connect One App",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Post",
-			"item": [
-				{
-					"name": "Dislike Post",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTg1MTkyLCJleHAiOjE2NTExODg3OTJ9.GXJPTsuwt47heb8igEnQIxejGl5Nr1v_8uQxvsPakEo",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3001/api/post/dislike/626ada4b5f2d2d54b67cfa9c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"post",
-								"dislike",
-								"626ada4b5f2d2d54b67cfa9c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Like Post",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTg1MTkyLCJleHAiOjE2NTExODg3OTJ9.GXJPTsuwt47heb8igEnQIxejGl5Nr1v_8uQxvsPakEo",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3001/api/post/like/626ada4b5f2d2d54b67cfa9c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"post",
-								"like",
-								"626ada4b5f2d2d54b67cfa9c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Post",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"content\": \"Hello World!\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3001/api/post",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"post"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Post",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTcyMDQ0LCJleHAiOjE2NTExNzU2NDR9.wFLKLgLPapB3A3QgmMTziRR6XdaUxdJpa8ARO10pgFU",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3001/api/post/626ada4b5f2d2d54b67cfa9c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"post",
-								"626ada4b5f2d2d54b67cfa9c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Post by id ",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3001/api/post/626ada4b5f2d2d54b67cfa9c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"post",
-								"626ada4b5f2d2d54b67cfa9c"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User",
-			"item": [
-				{
-					"name": "Get Profile",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3001/api/user",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Sign In",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{   \n    \"email\": \"Packie79@gmail.com\",\n    \"password\": \"Password@123?\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3001/api/auth",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"auth"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Sign Up",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{   \n    \"name\": \"Patrick McReary\",\n    \"username\": \"Packie_McReary79\",\n    \"email\": \"Packie79@gmail.com\",\n    \"dob\": \"1979-06-22\",\n    \"password\": \"Password@123?\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3001/api/user",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"user"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "c5196e6b-480c-4026-84ba-9e9e69f22091",
+    "name": "Connect One App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Post",
+      "item": [
+        {
+          "name": "Dislike Post",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTg1MTkyLCJleHAiOjE2NTExODg3OTJ9.GXJPTsuwt47heb8igEnQIxejGl5Nr1v_8uQxvsPakEo",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/post/dislike/626ada4b5f2d2d54b67cfa9c",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "post", "dislike", "626ada4b5f2d2d54b67cfa9c"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Like Post",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTg1MTkyLCJleHAiOjE2NTExODg3OTJ9.GXJPTsuwt47heb8igEnQIxejGl5Nr1v_8uQxvsPakEo",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/post/like/626ada4b5f2d2d54b67cfa9c",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "post", "like", "626ada4b5f2d2d54b67cfa9c"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"content\": \"Hello World!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/post",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "post"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTcyMDQ0LCJleHAiOjE2NTExNzU2NDR9.wFLKLgLPapB3A3QgmMTziRR6XdaUxdJpa8ARO10pgFU",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/post/626ada4b5f2d2d54b67cfa9c",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "post", "626ada4b5f2d2d54b67cfa9c"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Post by id ",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/post/626ada4b5f2d2d54b67cfa9c",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "post", "626ada4b5f2d2d54b67cfa9c"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/api/user",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "user"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign In",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{   \n    \"email\": \"Packie79@gmail.com\",\n    \"password\": \"Password@123?\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/auth",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "auth"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjliOTFkY2E2Zjk2ODQ4M2Q1ZmRiYyIsImVtYWlsIjoiZW1tYW56YTJAZ21haWwuY29tIiwiaWF0IjoxNjUxMTY5MTI5LCJleHAiOjE2NTExNzI3Mjl9.l2hCYsOQfBJiY0BqVA50s0-SzF8Tvhcuw7df87x-dZw",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{   \n    \"name\": \"Patrick McReary\",\n    \"username\": \"Packie_McReary79\",\n    \"email\": \"Packie79@gmail.com\",\n    \"dob\": \"1979-06-22\",\n    \"password\": \"Password@123?\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/user",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "user"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }

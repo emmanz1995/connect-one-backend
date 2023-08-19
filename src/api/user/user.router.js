@@ -1,17 +1,18 @@
 const { StatusCodes } = require('http-status-codes')
-const BadRequest = require('../errors/badRequest')
+const BadRequest = require('../../../errors/badRequest')
 const UserRoute = require('express').Router()
-const User = require('../model/userModel')
-const Post = require('../model/postModel')
-const requireLogin = require('../middleware/requireLogin')
+const User = require('../../mongo/users/userModel')
+const Post = require('../../mongo/posts/postModel')
+const requireLogin = require('../../../middleware/requireLogin')
 const Filter = require('bad-words')
 const cloudinary = require('cloudinary').v2
 
 UserRoute.post('/', async (req, res) => {
-  const {name, username, email, dob, avatar, password} = req.body
-  if (!name || !username || !email || !password) throw new BadRequest('Please add all the fields!')
-  if(!avatar) throw new BadRequest('Please add an avatar!')
-  const user = await User.findOne({email})
+  const { name, username, email, dob, avatar, password } = req.body
+  if (!name || !username || !email || !password)
+    throw new BadRequest('Please add all the fields!')
+  if (!avatar) throw new BadRequest('Please add an avatar!')
+  const user = await User.findOne({ email })
   let filter = new Filter()
   const badName = filter.isProfane(name.toLowerCase())
   const badUsername = filter.isProfane(username.toLowerCase())
@@ -34,14 +35,17 @@ UserRoute.post('/', async (req, res) => {
     email,
     avatar: { publicId: cloud?.public_id, url: cloud?.secure_url },
     dob,
-    password
+    password,
   })
   const savedUser = await registerUser.save()
   res.status(StatusCodes.CREATED).json(savedUser)
 })
 
 UserRoute.get('/', requireLogin, async (req, res) => {
-  const getProfile = await User.findById(req.user.id).populate('post follower following').select('-password -__v').populate('bookmarks')
+  const getProfile = await User.findById(req.user.id)
+    .populate('post follower following')
+    .select('-password -__v')
+    .populate('bookmarks')
   res.status(StatusCodes.OK).json(getProfile)
 })
 
@@ -51,7 +55,7 @@ UserRoute.get('/all', requireLogin, async (req, res) => {
 })
 
 UserRoute.put('/bookmark/:postId', requireLogin, async (req, res) => {
-  const {postId} = req.params
+  const { postId } = req.params
   const post = await Post.findById(postId)
   if (!post) {
     throw new BadRequest('Post was not found!')
@@ -59,69 +63,74 @@ UserRoute.put('/bookmark/:postId', requireLogin, async (req, res) => {
   if (post.length > 0) {
     throw new BadRequest('You already bookmarked this Post!')
   }
-  const bookmarkPost = await User.findByIdAndUpdate(req.user.id, {
-    $push: {
-      bookmarks: post
+  const bookmarkPost = await User.findByIdAndUpdate(
+    req.user.id,
+    {
+      $push: {
+        bookmarks: post,
+      },
+    },
+    {
+      new: true,
     }
-  }, {
-    new: true
-  })
+  )
   res.status(StatusCodes.OK).json(bookmarkPost)
 })
 
 UserRoute.put('/unbookmark/:postId', requireLogin, async (req, res) => {
-  const {postId} = req.params
+  const { postId } = req.params
   const post = await Post.findById(postId)
-  if (!post) {
-    throw new BadRequest('Post was not found!')
-  }
+  if (!post) throw new BadRequest('Post was not found!')
 
-  if (post.length < 0) {
+  if (post.length < 0)
     throw new BadRequest('Post was already removed from Bookmarks!')
-  }
-  const unbookmarkPost = await User.findByIdAndUpdate(req.user.id, {
-    $pull: {
-      bookmarks: post
+
+  const unbookmarkPost = await User.findByIdAndUpdate(
+    req.user.id,
+    {
+      $pull: {
+        bookmarks: post,
+      },
+    },
+    {
+      new: true,
     }
-  }, {
-    new: true
-  })
+  )
   res.status(StatusCodes.OK).json(unbookmarkPost)
 })
 
 UserRoute.put('/follow/:id', requireLogin, async (req, res) => {
   const userId = req.params.id
-  if (!userId) {
+  if (!userId)
     throw new BadRequest('Could not find user!')
-  }
+
   const user = await User.findById(req.user.id)
 
-  if (user.following.includes(userId)) {
+  if (user.following.includes(userId))
     throw new BadRequest('You are already following this user!')
-  }
+
   const followUser = await User.findByIdAndUpdate(req.user.id, {
-    $push: {following: userId}
+    $push: { following: userId },
   })
   await User.findByIdAndUpdate(userId, {
-    $push: {follower: req.user.id}
+    $push: { follower: req.user.id },
   })
   res.status(StatusCodes.OK).json(followUser)
 })
 
 UserRoute.put('/unfollow/:id', requireLogin, async (req, res) => {
   const userId = req.params.id
-  if (!userId) {
-    throw new BadRequest('Could not find user!')
-  }
+  if (!userId) throw new BadRequest('Could not find user!')
+
   const user = await User.findById(req.user.id)
-  if (!user.following.includes(userId)) {
+  if (!user.following.includes(userId))
     throw new BadRequest('You have already unfollowed this user!')
-  }
+
   const followUser = await User.findByIdAndUpdate(req.user.id, {
-    $pull: {following: userId}
+    $pull: { following: userId },
   })
   await User.findByIdAndUpdate(userId, {
-    $pull: {follower: req.user.id}
+    $pull: { follower: req.user.id },
   })
   res.status(StatusCodes.OK).json(followUser)
 })

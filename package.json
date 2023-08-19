@@ -6,8 +6,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit",
-    "start:test": "cross-env NODE_ENV=test node index.js"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --detectOpenHandles --forceExit",
+    "start:test": "cross-env NODE_ENV=test node index.js",
+    "prettier": "prettier --write '**.js'"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "gravatar": "^1.8.2",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "mongoose": "^6.3.1",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.15",
@@ -37,7 +39,9 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "eslint": "^8.29.0",
     "jest": "^29.0.1",
+    "prettier": "2.8.1",
     "supertest": "^6.2.4"
   }
 }
